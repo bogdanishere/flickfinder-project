@@ -1,0 +1,22 @@
+.main {
+  text-align: center;
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .title {
+    font-size: 1.875rem; // equivalent to text-3xl
+    font-weight: 600; // equivalent to font-semibold
+    margin-bottom: 1.5rem; // equivalent to space-y-6
+  }
+
+  .link {
+    display: inline-block;
+    background-color: #38bdf8; // equivalent to bg-accent-500
+    color: #1f2937; // equivalent to text-primary-800
+    padding: 0.75rem 1.5rem; // equivalent to px-6 py-3
+    font-size: 1.125rem; // equivalent to text-lg
+  }
+}

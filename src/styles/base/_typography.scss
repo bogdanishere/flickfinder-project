@@ -1,0 +1,122 @@
+@use "../abstracts/variables";
+@use "./animations";
+
+.heading-primary {
+  color: variables.$color-white;
+  text-transform: uppercase;
+  backface-visibility: hidden;
+  margin-bottom: 6rem;
+
+  &-main {
+    display: block;
+    font-size: 6rem;
+    font-weight: 400;
+    letter-spacing: 3.5rem;
+    animation-name: moveInLeft;
+    animation-duration: 1s;
+    animation-timing-function: ease-out;
+
+    @media only screen and (max-width: 56.25em) {
+      // tab-port
+      font-size: 4rem;
+      letter-spacing: 1rem;
+    }
+
+    @media only screen and (max-width: 37.5em) {
+      // phone
+      font-size: 3rem;
+      letter-spacing: 1rem;
+    }
+  }
+
+  &-sub {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 17.4px;
+    animation: moveInRight 1s ease-out;
+
+    @media only screen and (max-width: 56.25em) {
+      // tab-port
+      font-size: 1.8rem;
+      letter-spacing: 1.5rem;
+    }
+
+    @media only screen and (max-width: 37.5em) {
+      // phone
+      font-size: 1.6rem;
+      letter-spacing: 1.2rem;
+    }
+  }
+}
+
+.heading-secondary {
+  font-size: 3.5rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  display: inline-block;
+  background-image: linear-gradient(
+    to right,
+    variables.$color-primary-light,
+    variables.$color-primary-dark
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  transition: all 0.2s;
+  letter-spacing: 2px;
+
+  @media only screen and (max-width: 56.25em) {
+    // tab-port
+    font-size: 3rem;
+    letter-spacing: 1.5px;
+  }
+
+  @media only screen and (max-width: 37.5em) {
+    // phone
+    font-size: 2.5rem;
+    letter-spacing: 1px;
+  }
+
+  &:hover {
+    transform: skewY(2deg) skewX(15deg) scale(1.1);
+    text-shadow: 0.5rem 1rem 2rem rgba(variables.$color-black, 0.2);
+  }
+}
+
+.heading-tertiary {
+  font-size: variables.$default-font-size;
+  font-weight: 700;
+  text-transform: uppercase;
+
+  @media only screen and (max-width: 56.25em) {
+    // tab-port
+    font-size: 1.8rem;
+  }
+
+  @media only screen and (max-width: 37.5em) {
+    // phone
+    font-size: 1.6rem;
+  }
+}
+
+.paragraph {
+  font-size: variables.$default-font-size;
+
+  &:not(:last-child) {
+    margin-bottom: 3rem;
+  }
+
+  @media only screen and (max-width: 56.25em) {
+    // tab-port
+    font-size: 1.6rem;
+  }
+
+  @media only screen and (max-width: 37.5em) {
+    // phone
+    font-size: 1.4rem;
+    &:not(:last-child) {
+      margin-bottom: 2rem;
+    }
+  }
+}

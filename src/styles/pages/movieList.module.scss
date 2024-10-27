@@ -1,0 +1,77 @@
+@use "../abstracts/variables";
+@use "../components/button";
+@use "../utils/utils";
+@use "../base/typography";
+
+.movie-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(25rem, 1fr));
+  gap: 2rem;
+  padding: 2rem;
+}
+
+.card {
+  perspective: 150rem;
+  height: 40rem;
+
+  &__side {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.8s ease;
+    backface-visibility: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+
+    &--front {
+      background-color: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+    }
+
+    &--back {
+      background-color: variables.$color-white;
+      transform: rotateY(180deg);
+    }
+  }
+
+  &:hover {
+    .card__side--front {
+      transform: rotateY(-180deg);
+    }
+
+    .card__side--back {
+      transform: rotateY(0);
+    }
+  }
+
+  &__picture {
+    width: 100%;
+    height: 100%;
+    object-position: center;
+    background-color: #f0f0f0;
+  }
+
+  &__details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+
+    h3 {
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+      text-align: center;
+    }
+
+    p {
+      margin-bottom: 0.5rem;
+    }
+  }
+}

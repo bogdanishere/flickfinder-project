@@ -1,0 +1,95 @@
+@use "../abstracts/variables";
+
+.background {
+  background-color: variables.$color-grey-light-1;
+}
+
+.footer {
+  background-color: rgba(variables.$color-black, 0.8);
+  color: variables.$color-grey-light-1;
+
+  padding-top: 20rem;
+  padding-bottom: 10rem;
+  font-size: 1.4rem;
+
+  --webkit-clip-path: polygon(0 25vh, 100% 0, 100% 100%, 0 100%);
+  clip-path: polygon(0 25vh, 100% 0, 100% 100%, 0 100%);
+
+  @media only screen and (max-width: 37.5em) {
+    // phone
+    --webkit-clip-path: polygon(0 15vh, 100% 0, 100% 100%, 0 100%);
+    clip-path: polygon(0 15vh, 100% 0, 100% 100%, 0 100%);
+  }
+
+  &__logo-box {
+    text-align: center;
+    margin-bottom: 6rem;
+  }
+
+  &__logo {
+    width: 20rem;
+    height: 20rem;
+  }
+
+  &__list {
+    display: flex;
+    list-style: none;
+
+    margin: 0 auto;
+  }
+  &__item {
+    margin: 0 1.5rem;
+    &:not(:last-child) {
+      margin-right: 1.5rem;
+    }
+  }
+  &__link {
+    padding-left: 1rem;
+
+    &:not(:last-child) {
+      padding-right: 2rem;
+    }
+
+    &:link,
+    &:visited {
+      color: variables.$color-grey-light-2;
+      text-decoration: none;
+      text-transform: uppercase;
+      display: inline-block;
+      transition: all 0.2s;
+      background-color: variables.$color-grey-dark-3;
+    }
+    &:hover,
+    &:active {
+      color: variables.$color-primary;
+      box-shadow: 0 1rem 2rem rgba(variables.$color-black, 0.2);
+      transform: rotate(5deg) scale(1.3);
+    }
+  }
+  &__navigation {
+    border-top: 1px solid variables.$color-grey-dark;
+    padding-top: 2rem;
+    display: inline-block;
+  }
+
+  &__copyright {
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    @media only screen and (max-width: 37.5em) {
+      flex-direction: column;
+    }
+
+    border-top: 1px solid variables.$color-grey-dark;
+    padding-top: 2rem;
+    width: 80%;
+    &--p {
+      border-top: 1px solid variables.$color-grey-dark;
+      padding-top: 2rem;
+      width: 80%;
+    }
+  }
+}

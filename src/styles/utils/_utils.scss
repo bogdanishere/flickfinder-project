@@ -1,0 +1,42 @@
+@use "../abstracts/variables";
+
+.u-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+}
+
+.u-padding-bottom {
+  padding-bottom: 4rem;
+}
+
+.u-center-text {
+  text-align: center;
+}
+
+.u-margin-bottom-big {
+  margin-bottom: 8rem;
+}
+
+.u-margin-bottom-medium {
+  margin-bottom: 4rem;
+}
+
+.u-margin-bottom-small {
+  margin-bottom: 1.5rem;
+}
+
+.u-margin-top-huge {
+  margin-top: 10rem;
+}
+
+.u-flex-container {
+  display: flex;
+  flex-direction: column;
+  gap: variables.$gutter-vertical;
+}
+
+.u-text-big {
+  font-size: 3rem;
+}

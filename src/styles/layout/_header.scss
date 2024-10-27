@@ -1,0 +1,69 @@
+@use "../abstracts/variables";
+@use "../abstracts/mixins";
+
+.background {
+  background-color: variables.$color-grey-light-1;
+}
+
+.header {
+  height: 95vh;
+  background-image: linear-gradient(
+    to right bottom,
+    rgba(variables.$color-primary-light, 0.8),
+    rgba(variables.$color-primary-dark, 0.8)
+  );
+  background-size: cover;
+  background-position: top;
+  --webkit-clip-path: polygon(0 0, 100% 0%, 100% 75vh, 0 100%);
+  clip-path: polygon(0 0, 100% 0%, 100% 75vh, 0 100%);
+  position: relative;
+
+  @media only screen and (max-width: 37.5em) {
+    // phone
+    --webkit-clip-path: polygon(0 0, 100% 0%, 100% 85vh, 0 100%);
+    clip-path: polygon(0 0, 100% 0%, 100% 85vh, 0 100%);
+  }
+
+  &__text-box {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+
+  &__logo-box {
+    position: absolute;
+    top: 3rem;
+    left: 3rem;
+
+    @media only screen and (max-width: 37.5em) {
+      // phone
+      top: 2rem;
+      left: 2rem;
+    }
+  }
+
+  &__logo {
+    height: 12rem;
+    width: auto;
+  }
+}
+
+.main {
+  background-color: variables.$color-grey-light-1;
+  padding: 25rem 0 15rem 0;
+  margin-top: -20rem;
+
+  @media only screen and (max-width: 56.25em) {
+    // tab-port
+    padding: 20rem 0 10rem 0;
+    margin-top: -15rem;
+  }
+
+  @media only screen and (max-width: 37.5em) {
+    // phone
+    padding: 15rem 0 5rem 0;
+    margin-top: -10rem;
+  }
+}
