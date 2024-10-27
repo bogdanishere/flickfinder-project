@@ -1,24 +1,29 @@
 "use client";
 
-import MovieSearchForm from "@/components/MovieSearchForm";
+import MovieSearchForm from "@/_components/MovieSearchForm";
 import imageIcon from "@/images/icon-test.png";
 import styles from "./page.module.scss";
 import Image from "next/image";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import MovieList from "@/_components/MovieList";
+import Footer from "@/_components/Footer";
+import QueryProvider from "@/context/QueryProvider";
 import { MovieProvider } from "@/context/MovieSearchApi";
-import MovieList from "@/components/MovieList";
-import Footer from "@/components/Footer";
+import { useEffect, useState } from "react";
+import Spinner from "@/_components/Spinner";
 
 export default function Home() {
-  const queryClient = new QueryClient({
-    defaultOptions: {
-      queries: {
-        staleTime: 60 * 1000,
-      },
-    },
-  });
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  if (!isClient) {
+    return <Spinner />;
+  }
+
   return (
-    <QueryClientProvider client={queryClient}>
+    <QueryProvider>
       <MovieProvider>
         <header className={styles.background}>
           <div className={styles["header"]}>
@@ -47,6 +52,6 @@ export default function Home() {
         </main>
         <Footer />
       </MovieProvider>
-    </QueryClientProvider>
+    </QueryProvider>
   );
 }

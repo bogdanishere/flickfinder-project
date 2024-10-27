@@ -12,14 +12,19 @@ import Link from "next/link";
 const MovieList: React.FC = () => {
   const { movies, isLoading, isError } = useMovie();
   const [failedImages, setFailedImages] = useState<string[]>([]);
-  const fallbackImage = "/images/fallback.png";
+  const fallbackImage =
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUwCJYSnbBLMEGWKfSnWRGC_34iCCKkxePpg&s";
 
   const handleImageError = (imdbID: string) => {
     setFailedImages((prev) => [...prev, imdbID]);
   };
 
   const filteredMovies = useMemo(
-    () => movies.filter((movie) => !failedImages.includes(movie.imdbID)),
+    () =>
+      movies.filter(
+        (movie) =>
+          !failedImages.includes(movie.imdbID) && movie.Poster !== "N/A"
+      ),
     [movies, failedImages]
   );
 
@@ -48,7 +53,7 @@ const MovieList: React.FC = () => {
               className={styles["card__picture"]}
               width={200}
               height={300}
-              src={movie.Poster === "N/A" ? fallbackImage : movie.Poster} // Use fallback image if Poster is "N/A"
+              src={movie.Poster === "N/A" ? fallbackImage : movie.Poster}
               alt={`Poster for ${movie.Title}`}
               onError={() => handleImageError(movie.imdbID)}
             />

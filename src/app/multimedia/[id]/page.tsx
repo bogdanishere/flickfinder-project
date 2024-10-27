@@ -1,5 +1,5 @@
 import { requestMoreDetailsActions } from "@/actions/actionMoreDetails";
-import StarRating from "@/components/StarRating";
+import StarRating from "@/_components/StarRating";
 import styles from "@/styles/pages/multimedia.module.scss";
 import { extractRating } from "@/utils/extragRating";
 import Image from "next/image";
@@ -8,10 +8,11 @@ import Link from "next/link";
 import imageIcon from "@/images/icon-test.png";
 
 interface MovieDetailsProps {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }
 
-export async function generateMetadata({ params }: MovieDetailsProps) {
+export async function generateMetadata(props: MovieDetailsProps) {
+  const params = await props.params;
   const { id } = params;
   return {
     title: `Movie ${id}`,
@@ -19,14 +20,15 @@ export async function generateMetadata({ params }: MovieDetailsProps) {
   };
 }
 
-export default async function MovieDetails({ params }: MovieDetailsProps) {
+export default async function MovieDetails(props: MovieDetailsProps) {
+  const params = await props.params;
   const { id } = params;
   const data = await requestMoreDetailsActions(id);
 
   const validPoster =
     data.Poster && data.Poster !== "N/A" && data.Poster.trim() !== ""
       ? data.Poster
-      : "/images/fallback.png";
+      : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUwCJYSnbBLMEGWKfSnWRGC_34iCCKkxePpg&s";
 
   const averageRating = +data.Ratings?.reduce(
     (sum, rating) => sum + extractRating(rating.Value) / data.Ratings.length,
@@ -52,7 +54,10 @@ export default async function MovieDetails({ params }: MovieDetailsProps) {
             src={validPoster}
             alt={data.Title}
             className={styles["poster__img"]}
-            fill
+            width={350}
+            height={450}
+            quality={100}
+            priority
           />
         </div>
         <div className={styles.details}>
@@ -92,7 +97,7 @@ export default async function MovieDetails({ params }: MovieDetailsProps) {
           </div>
           <Link href="/" className={styles.backLink}>
             <button
-              className={`${styles.btn} ${styles["btn--green"]} ${styles["btn--animated"]}   `}
+              className={`${styles.btn} ${styles["btn--green"]} ${styles["btn--animated"]}`}
             >
               Back to our main page
             </button>
