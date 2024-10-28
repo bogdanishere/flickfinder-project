@@ -9,7 +9,8 @@ function Error() {
     <div className={styles["error-container"]}>
       <h1>Movie not found</h1>
       <p>
-        Sorry, the movie you are looking for is not available at the moment.
+        Sorry, there are some problem with The Open Movie Database or most
+        probably the movie you are looking for is not available at the moment.
         Please try again later.
       </p>
       <button

@@ -2,24 +2,31 @@
 
 import React, { useMemo, useState } from "react";
 import Spinner from "./Spinner";
-import { useMovie } from "../context/useApi";
+import { useMovie } from "../_context/useApi";
 import Image from "next/image";
 import NotFound from "./NotFound";
 
 import styles from "../styles/pages/movieList.module.scss";
 import Link from "next/link";
+import { useTheme } from "@/_hooks/useTheme";
 
 const MovieList: React.FC = () => {
+  const { theme } = useTheme();
   const { movies, isLoading, isError } = useMovie();
   const [failedImages, setFailedImages] = useState<string[]>([]);
-  const fallbackImage = "/images/fallback.png";
+  const fallbackImage =
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUwCJYSnbBLMEGWKfSnWRGC_34iCCKkxePpg&s";
 
   const handleImageError = (imdbID: string) => {
     setFailedImages((prev) => [...prev, imdbID]);
   };
 
   const filteredMovies = useMemo(
-    () => movies.filter((movie) => !failedImages.includes(movie.imdbID)),
+    () =>
+      movies.filter(
+        (movie) =>
+          !failedImages.includes(movie.imdbID) && movie.Poster !== "N/A"
+      ),
     [movies, failedImages]
   );
 
@@ -48,14 +55,16 @@ const MovieList: React.FC = () => {
               className={styles["card__picture"]}
               width={200}
               height={300}
-              src={movie.Poster === "N/A" ? fallbackImage : movie.Poster} // Use fallback image if Poster is "N/A"
+              src={movie.Poster === "N/A" ? fallbackImage : movie.Poster}
               alt={`Poster for ${movie.Title}`}
               onError={() => handleImageError(movie.imdbID)}
             />
           </div>
 
           <div
-            className={`${styles["card__side"]} ${styles["card__side--back"]}`}
+            className={`${styles["card__side"]} ${styles["card__side--back"]} ${
+              styles[`card__side--back--${theme}`]
+            }`}
           >
             <div className={styles["card__details"]}>
               <h2 className={styles["u-center-text"]}>{movie.Title}</h2>

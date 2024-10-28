@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, ReactNode, useEffect, useState } from "react";
-import useSearchMoviesByName from "../hooks/useSearchMoviesByName";
+import useSearchMoviesByName from "../_hooks/useSearchMoviesByName";
 import { getLocalStorageItem } from "@/utils/getLocalStorageItem";
 
 interface Movie {

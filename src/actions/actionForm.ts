@@ -3,9 +3,8 @@
 import { searchMoviesByNameOrType } from "@/network/api/movies";
 
 export const requestMoviesActions = async (query: string) => {
+  if (!query) return { Search: [] };
   const response = await searchMoviesByNameOrType(query);
-  if (!response || response.Error) {
-    throw new Error("Movie not found");
-  }
+
   return response;
 };

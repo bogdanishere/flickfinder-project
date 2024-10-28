@@ -1,12 +1,25 @@
 @use "../abstracts/variables";
 
 .background {
-  background-color: variables.$color-grey-light-1;
+  &--light {
+    background-color: variables.$color-grey-light-1;
+  }
+  &--dark {
+    background-color: darken(variables.$color-grey-light-1, 80%);
+  }
 }
 
 .footer {
-  background-color: rgba(variables.$color-black, 0.8);
-  color: variables.$color-grey-light-1;
+  &--light {
+    background-color: rgba(variables.$color-black, 0.8);
+    color: variables.$color-grey-light-1;
+  }
+  &--dark {
+    background-color: rgba(variables.$color-grey-light-1, 0.8);
+    color: variables.$color-grey-dark-3;
+  }
+  // background-color: rgba(variables.$color-black, 0.8);
+  // color: variables.$color-grey-light-1;
 
   padding-top: 20rem;
   padding-bottom: 10rem;
@@ -50,18 +63,36 @@
       padding-right: 2rem;
     }
 
+    &--light:link,
+    &--light:visited {
+      color: variables.$color-grey-light-2;
+      background-color: variables.$color-grey-dark-3;
+    }
+
+    &--dark:link,
+    &--dark:visited {
+      color: inherit;
+      background-color: inherit;
+    }
+
     &:link,
     &:visited {
-      color: variables.$color-grey-light-2;
+      // color: variables.$color-grey-light-2;
       text-decoration: none;
       text-transform: uppercase;
       display: inline-block;
       transition: all 0.2s;
-      background-color: variables.$color-grey-dark-3;
+      // background-color: variables.$color-grey-dark-3;
     }
     &:hover,
     &:active {
-      color: variables.$color-primary;
+      &--light {
+        color: variables.$color-primary;
+      }
+      &--dark {
+        color: darken(variables.$color-grey-light-1, 100%);
+      }
+      // color: variables.$color-primary;
       box-shadow: 0 1rem 2rem rgba(variables.$color-black, 0.2);
       transform: rotate(5deg) scale(1.3);
     }

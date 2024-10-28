@@ -1,13 +1,19 @@
+@use "../components/button";
+@use "../abstracts/variables";
+
 .main {
+  width: 100%;
+  height: 100vh;
   text-align: center;
   margin-top: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-color: variables.$color-grey-light-1;
 
   .title {
-    font-size: 1.875rem; // equivalent to text-3xl
+    font-size: 3.5rem; // equivalent to text-3xl
     font-weight: 600; // equivalent to font-semibold
     margin-bottom: 1.5rem; // equivalent to space-y-6
   }
