@@ -51,7 +51,7 @@
 }
 
 .heading-secondary {
-  font-size: 3.5rem;
+  font-size: 2.9rem;
   text-transform: uppercase;
   font-weight: 700;
   display: inline-block;
@@ -68,13 +68,13 @@
 
   @media only screen and (max-width: 56.25em) {
     // tab-port
-    font-size: 3rem;
+    font-size: 2.5rem;
     letter-spacing: 1.5px;
   }
 
   @media only screen and (max-width: 37.5em) {
     // phone
-    font-size: 2.5rem;
+    font-size: 2rem;
     letter-spacing: 1px;
   }
 
