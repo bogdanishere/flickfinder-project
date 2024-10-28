@@ -32,6 +32,7 @@ const MovieList: React.FC = () => {
 
   if (isLoading) return <Spinner />;
   if (isError) return <NotFound />;
+
   if (filteredMovies.length === 0)
     return (
       <div className={styles["u-center-text"]}>
