@@ -8,11 +8,13 @@
   grid-template-columns: repeat(auto-fill, minmax(25rem, 1fr));
   gap: 2rem;
   padding: 2rem;
+  transition: background-color 0.3s ease; // Adaugă dacă fundalul se schimbă
 }
 
 .card {
   perspective: 150rem;
   height: 40rem;
+  position: relative; // Adaugă pentru a poziționa absolut părțile cardului
 
   &__side {
     position: absolute;
@@ -20,7 +22,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    transition: transform 0.8s ease;
+    transition: transform 0.8s ease, background-color 0.3s ease, color 0.3s ease; // Adaugă tranziția pentru background și color
     backface-visibility: hidden;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -35,8 +37,21 @@
     }
 
     &--back {
-      background-color: variables.$color-white;
       transform: rotateY(180deg);
+
+      // Stiluri comune pentru partea din spate
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &--light {
+        background-color: variables.$color-white;
+        color: rgba(variables.$color-black, 0.6);
+      }
+      &--dark {
+        background-color: rgba(variables.$color-grey-dark-2, 0.9);
+        color: variables.$color-grey-light-1;
+      }
     }
   }
 
@@ -53,6 +68,7 @@
   &__picture {
     width: 100%;
     height: 100%;
+    object-fit: cover;
     object-position: center;
     background-color: #f0f0f0;
   }
@@ -63,11 +79,12 @@
     align-items: center;
     justify-content: center;
     height: 100%;
+    padding: 1rem;
+    text-align: center;
 
-    h3 {
+    h2 {
       margin-bottom: 1rem;
-      font-size: 1.2rem;
-      text-align: center;
+      font-size: 1.6rem;
     }
 
     p {

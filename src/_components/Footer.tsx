@@ -1,11 +1,15 @@
+"use client";
+
 import Image from "next/image";
 import styles from "../styles/pages/footer.module.scss";
 import imageIcon from "@/images/icon-test.png";
+import { useTheme } from "@/_hooks/useTheme";
 
 function Footer() {
+  const { theme } = useTheme();
   return (
-    <footer className={styles.background}>
-      <div className={styles.footer}>
+    <footer className={`${styles[`background--${theme}`]}`}>
+      <div className={`${styles.footer} ${styles[`footer--${theme}`]}`}>
         <div className={styles["footer__logo-box"]}>
           <Image
             src={imageIcon}
@@ -19,7 +23,9 @@ function Footer() {
               Build by
               <a
                 href="https://github.com/bogdanishere"
-                className={styles["footer__link"]}
+                className={`${styles["footer__link"]} ${
+                  styles[`footer__link--${theme}`]
+                }`}
               >
                 Bogdan Vasilescu
               </a>

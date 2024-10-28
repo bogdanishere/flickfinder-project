@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "../styles/globals.scss";
+import { ThemeProvider } from "@/_context/ThemeApi";
 
 export const metadata: Metadata = {
   title: "FlickFinder",
@@ -13,7 +14,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <ThemeProvider>{children}</ThemeProvider>
+      </body>
     </html>
   );
 }

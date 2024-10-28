@@ -44,22 +44,54 @@
   }
 
   &--white {
-    background-color: variables.$color-white;
-    color: variables.$color-grey-dark;
-    &::after {
+    transition: all 0.3s;
+    &--light {
       background-color: variables.$color-white;
+      color: variables.$color-grey-dark;
+      &::after {
+        background-color: variables.$color-white;
+      }
     }
+
+    &--dark {
+      background-color: darken(variables.$color-white, 80%);
+      color: lighten(variables.$color-grey-dark, 80%);
+      &::after {
+        background-color: variables.$color-white, 80%;
+      }
+    }
+    // background-color: variables.$color-white;
+    // color: variables.$color-grey-dark;
+    // &::after {
+    //   background-color: variables.$color-white;
+    // }
   }
 
   &--green {
-    background-color: variables.$color-primary;
-    color: variables.$color-white;
-    &::after {
+    // background-color: variables.$color-primary;
+    // color: variables.$color-white;
+    // &::after {
+    //   background-color: variables.$color-primary;
+    // }
+
+    &--light {
       background-color: variables.$color-primary;
+      color: variables.$color-white;
+      &::after {
+        background-color: variables.$color-primary;
+      }
+    }
+
+    &--dark {
+      background-color: darken(variables.$color-white, 80%);
+      color: lighten(variables.$color-grey-dark, 80%);
+      &::after {
+        background-color: variables.$color-white, 80%;
+      }
     }
   }
 
-  &-animated {
+  &--animated {
     animation: moveInButton 1s ease-out 0.5s;
     animation-fill-mode: backwards;
   }

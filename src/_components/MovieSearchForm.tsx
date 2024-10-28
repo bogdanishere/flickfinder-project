@@ -1,6 +1,7 @@
 "use client";
 
-import { useMovie } from "@/context/useApi";
+import { useMovie } from "@/_context/useApi";
+import { useTheme } from "@/_hooks/useTheme";
 import styles from "@/styles/pages/movieSearchForm.module.scss";
 
 import { useForm, SubmitHandler } from "react-hook-form";
@@ -11,6 +12,8 @@ type FormValues = {
 
 function MovieSearchForm() {
   const { searchMovies, isLoading } = useMovie();
+  const { theme } = useTheme();
+
   const {
     register,
     handleSubmit,
@@ -26,7 +29,9 @@ function MovieSearchForm() {
       <div className={styles["form__group"]}>
         <input
           type="text"
-          className={styles["form__input"]}
+          className={`${styles["form__input"]} ${
+            styles[`form__input--${theme}`]
+          }`}
           placeholder="Search your next movie"
           id="movie"
           {...register("movie", { required: true })}
@@ -40,7 +45,9 @@ function MovieSearchForm() {
 
       <button
         type="submit"
-        className={`${styles.btn} ${styles["btn--white"]} ${styles["btn--animated"]}`}
+        className={`${styles.btn} ${styles[`btn--white--${theme}`]} ${
+          styles["btn--animated"]
+        }`}
         disabled={isLoading}
       >
         {isLoading ? "Searching..." : "Discover new stories"}

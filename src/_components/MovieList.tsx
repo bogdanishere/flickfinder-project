@@ -2,14 +2,16 @@
 
 import React, { useMemo, useState } from "react";
 import Spinner from "./Spinner";
-import { useMovie } from "../context/useApi";
+import { useMovie } from "../_context/useApi";
 import Image from "next/image";
 import NotFound from "./NotFound";
 
 import styles from "../styles/pages/movieList.module.scss";
 import Link from "next/link";
+import { useTheme } from "@/_hooks/useTheme";
 
 const MovieList: React.FC = () => {
+  const { theme } = useTheme();
   const { movies, isLoading, isError } = useMovie();
   const [failedImages, setFailedImages] = useState<string[]>([]);
   const fallbackImage =
@@ -60,7 +62,9 @@ const MovieList: React.FC = () => {
           </div>
 
           <div
-            className={`${styles["card__side"]} ${styles["card__side--back"]}`}
+            className={`${styles["card__side"]} ${styles["card__side--back"]} ${
+              styles[`card__side--back--${theme}`]
+            }`}
           >
             <div className={styles["card__details"]}>
               <h2 className={styles["u-center-text"]}>{movie.Title}</h2>
