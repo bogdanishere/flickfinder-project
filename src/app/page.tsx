@@ -2,7 +2,7 @@
 
 import MovieSearchForm from "@/_components/MovieSearchForm";
 
-import styles from "./page.module.scss";
+import styles from "@/styles/pages/main-page.module.scss";
 
 import MovieList from "@/_components/MovieList";
 import Footer from "@/_components/Footer";
