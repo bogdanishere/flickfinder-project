@@ -8,9 +8,11 @@ $fontSize: 2.5rem;
 .movieDetails {
   &--light {
     background-color: variables.$color-grey-light-2;
+    transition: background-color 0.4s ease;
   }
   &--dark {
     background-color: darken(variables.$color-grey-light-1, 70%);
+    transition: background-color 0.4s ease;
   }
   display: flex;
   justify-content: center;
@@ -19,7 +21,6 @@ $fontSize: 2.5rem;
   width: 100%;
   // background-color: variables.$color-grey-light-2;
   position: relative;
-  transition: background-color 0.4s ease;
 }
 
 .icon {
