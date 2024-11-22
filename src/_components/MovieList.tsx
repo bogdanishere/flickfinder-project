@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import Spinner from "./Spinner";
 import { useMovie } from "../_context/useApi";
 import Image from "next/image";
@@ -10,9 +10,14 @@ import styles from "../styles/pages/movieList.module.scss";
 import Link from "next/link";
 import { useTheme } from "@/_hooks/useTheme";
 
-const MovieList: React.FC = () => {
+interface MovieListProps {
+  page: string;
+}
+
+const MovieList: React.FC<MovieListProps> = ({ page }) => {
   const { theme } = useTheme();
-  const { movies, isLoading, isError } = useMovie();
+  const { movies, isLoading, isError, setPage = () => {} } = useMovie();
+
   const [failedImages, setFailedImages] = useState<string[]>([]);
   const fallbackImage =
     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUwCJYSnbBLMEGWKfSnWRGC_34iCCKkxePpg&s";
@@ -30,6 +35,12 @@ const MovieList: React.FC = () => {
     [movies, failedImages]
   );
 
+  useEffect(() => {
+    if (setPage) {
+      setPage(page);
+    }
+  }, [page, setPage]);
+
   if (isLoading) return <Spinner />;
   if (isError) return <NotFound />;
 
@@ -39,8 +50,8 @@ const MovieList: React.FC = () => {
         <p
           className={`${styles["u-margin-top-huge"]} ${styles["u-text-big"]} ${styles["heading-secondary"]}`}
         >
-          There are no movies available right now. Start searching to discover
-          new stories!
+          The movies you&apos;re looking for on this page could not be found.
+          Please try a different search.
         </p>
       </div>
     );
@@ -73,7 +84,7 @@ const MovieList: React.FC = () => {
               <p className={styles["u-padding-bottom"]}>
                 Category: {movie.Type}
               </p>
-              <Link href={`/multimedia/${movie.imdbID}`}>
+              <Link href={`/multimedia/${movie.imdbID}?page=${page}`}>
                 <button
                   className={`${styles["btn"]} ${styles["btn--animated"]}`}
                 >

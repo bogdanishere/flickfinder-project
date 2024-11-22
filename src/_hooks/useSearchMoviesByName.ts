@@ -1,13 +1,16 @@
 import { requestMoviesActions } from "@/actions/actionForm";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 
-export default function useSearchMoviesByName(name: string) {
+export default function useSearchMoviesByName(
+  name: string,
+  page: string | number
+) {
   const queryClient = useQueryClient();
 
   const { data, isLoading, isError, refetch } = useQuery({
-    queryKey: ["searchMovies", name],
+    queryKey: ["searchMovies", name, page],
     queryFn: async () => {
-      const response = await requestMoviesActions(name);
+      const response = await requestMoviesActions(name, page);
       return response;
     },
     enabled: Boolean(name),
@@ -15,7 +18,7 @@ export default function useSearchMoviesByName(name: string) {
 
   const moviesByNameCache = () =>
     queryClient.invalidateQueries({
-      queryKey: ["searchMovies"],
+      queryKey: ["searchMovies", name, page],
     });
 
   return {

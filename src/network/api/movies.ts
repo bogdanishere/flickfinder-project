@@ -15,9 +15,12 @@ interface SearchMoviesByNameOrType {
   };
 }
 
-export const searchMoviesByNameOrType = async (query: string) => {
+export const searchMoviesByNameOrType = async (
+  query: string,
+  page: number | string = 1
+) => {
   const response: SearchMoviesByNameOrType = await api.get(
-    `?apikey=${apiKey}&s=${query}`
+    `?apikey=${apiKey}&s=${query}&page=${page}`
   );
   return response.data;
 };

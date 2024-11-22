@@ -3,6 +3,7 @@
 import { useMovie } from "@/_context/useApi";
 import { useTheme } from "@/_hooks/useTheme";
 import styles from "@/styles/pages/movieSearchForm.module.scss";
+import { useRouter } from "next/navigation";
 
 import { useForm, SubmitHandler } from "react-hook-form";
 
@@ -11,6 +12,7 @@ type FormValues = {
 };
 
 function MovieSearchForm() {
+  const router = useRouter();
   const { searchMovies, isLoading } = useMovie();
   const { theme } = useTheme();
 
@@ -21,6 +23,7 @@ function MovieSearchForm() {
   } = useForm<FormValues>();
 
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
+    router.push("/?page=1");
     searchMovies(data.movie);
   };
 

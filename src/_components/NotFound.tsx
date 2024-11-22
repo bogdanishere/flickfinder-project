@@ -5,7 +5,7 @@ function NotFound() {
   return (
     <main className={styles.main}>
       <h1 className={styles.title}>This page could not be found :(</h1>
-      <Link href="/">
+      <Link href="/1">
         <button
           className={`${styles.btn} ${styles["btn--green"]} ${styles["btn--animated"]}`}
         >
