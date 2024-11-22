@@ -8,6 +8,10 @@ import Link from "next/link";
 
 import { useTheme } from "@/_hooks/useTheme";
 import ThemeChange from "./ThemeChange";
+import { useSearchParams } from "next/navigation";
+import verifyPage from "@/utils/verifyPage";
+import { useEffect, useState } from "react";
+import Spinner from "./Spinner";
 
 function Multimedia({
   data,
@@ -35,17 +39,39 @@ function Multimedia({
   };
 }) {
   const { theme } = useTheme();
+  const page = useSearchParams().get("page");
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  if (!isClient) {
+    return <Spinner />;
+  }
+
+  const validPage = verifyPage(page);
+
   const validPoster =
     data.Poster && data.Poster !== "N/A" && data.Poster.trim() !== ""
       ? data.Poster
       : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUwCJYSnbBLMEGWKfSnWRGC_34iCCKkxePpg&s";
 
-  const averageRating = +data.Ratings?.reduce(
-    (sum, rating) => sum + extractRating(rating.Value) / data.Ratings.length,
-    0
-  ).toFixed(2);
+  const averageRating =
+    data.Ratings && data.Ratings.length > 0
+      ? Number(
+          (
+            data.Ratings.reduce(
+              (sum, rating) => sum + extractRating(rating.Value),
+              0
+            ) / data.Ratings.length
+          ).toFixed(2)
+        )
+      : 0;
 
-  const ratedBy = data.Ratings.map((rating) => rating.Source).join(", ");
+  const ratedBy = data.Ratings
+    ? data.Ratings.map((rating) => rating.Source).join(", ")
+    : "No ratings available";
 
   const countries = data.Country.includes(",")
     ? `Countries: ${data.Country}`
@@ -130,7 +156,7 @@ function Multimedia({
                 </strong>
               </div>
             </div>
-            <Link href="/" className={styles.backLink}>
+            <Link href={`/?page=${validPage}`} className={styles.backLink}>
               <button
                 className={`${styles.btn} ${styles[`btn--green--${theme}`]} ${
                   styles["btn--animated"]

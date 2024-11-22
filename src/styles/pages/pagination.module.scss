@@ -1,0 +1,30 @@
+@use "../base/animations";
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 5rem;
+  margin-bottom: 2rem;
+}
+
+.nonButton {
+  &__light {
+    color: black;
+  }
+  &__dark {
+    color: white;
+  }
+  padding: 1.8rem;
+  background-color: transparent;
+  border: none;
+  font-size: larger;
+  animation: moveInButton 1s ease-out 0.5s;
+  animation-fill-mode: backwards;
+
+  @media screen and (max-width: 768px) {
+    padding: 1.5rem;
+  }
+  @media screen and (max-width: 600px) {
+    padding: 1.2rem;
+  }
+}

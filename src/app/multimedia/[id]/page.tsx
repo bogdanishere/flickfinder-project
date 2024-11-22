@@ -14,9 +14,10 @@ export async function generateMetadata(props: MovieDetailsProps) {
   };
 }
 
-export default async function MovieDetails(props: MovieDetailsProps) {
+export default async function Page(props: MovieDetailsProps) {
   const params = await props.params;
   const { id } = params;
+
   const data = await requestMoreDetailsActions(id);
 
   return <Multimedia data={data} />;

@@ -15,6 +15,8 @@ interface Movie {
 interface MovieContextType {
   searchMovies: (name: string) => void;
   movies: Movie[];
+  page: string;
+  setPage: (page: string) => void;
   isLoading: boolean;
   isError: boolean;
 }
@@ -31,12 +33,14 @@ export const MovieProvider = ({ children }: { children: ReactNode }) => {
     JSON.parse(getLocalStorageItem("movies") || "[]")
   );
 
+  const [page, setPage] = useState<string>("1");
+
   const {
     moviesByName,
     isLoadingMoviesByName,
     isErrorMoviesByName,
     refetchMoviesByName,
-  } = useSearchMoviesByName(query);
+  } = useSearchMoviesByName(query, page);
 
   const searchMovies = (name: string) => {
     setQuery(name);
@@ -56,6 +60,8 @@ export const MovieProvider = ({ children }: { children: ReactNode }) => {
       value={{
         searchMovies,
         movies,
+        page,
+        setPage,
         isLoading: isLoadingMoviesByName,
         isError: isErrorMoviesByName,
       }}
