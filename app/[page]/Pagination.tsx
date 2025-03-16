@@ -2,50 +2,16 @@
 
 import { useRouter } from "next/navigation";
 import Button from "@/components/Button";
-import { useMovieListStore } from "@/stores/movieListStore";
-import { searchMoviesByNameOrType } from "./actions";
-import { useSearchMovieStore } from "@/stores/searchMovieStore";
 
 export function Pagination({ page }: { page: number }) {
   const router = useRouter();
-  const { setMovieList, setIsSubmitting } = useMovieListStore();
-  const { searchMovie } = useSearchMovieStore();
 
   async function handlePrevious() {
     if (page <= 1) return;
-
-    try {
-      setIsSubmitting(true);
-      const data = await searchMoviesByNameOrType(searchMovie, page - 1);
-      if (data.Response === "True") {
-        setMovieList(data.Search);
-      } else {
-        setMovieList([]);
-      }
-    } catch {
-      throw new Error("Error pagination fetching data");
-    } finally {
-      setIsSubmitting(false);
-    }
-
     router.replace(`/${page - 1}`);
   }
 
   async function handleNext() {
-    try {
-      setIsSubmitting(true);
-      const data = await searchMoviesByNameOrType(searchMovie, page + 1);
-      if (data.Response === "True") {
-        setMovieList(data.Search);
-      } else {
-        setMovieList([]);
-      }
-    } catch {
-      throw new Error("Error pagination fetching data");
-    } finally {
-      setIsSubmitting(false);
-    }
-
     router.replace(`/${page + 1}`);
   }
 

@@ -16,7 +16,7 @@ export async function generateMetadata({
   const { page } = await params;
 
   return {
-    title: "FlickFinder " + page,
+    title: "FlickFinder page " + page,
     description:
       "Welcome to FlickFinder, the best place to find your favorite movies, TV shows, and more!",
   };
@@ -44,7 +44,7 @@ export default async function Page({ params }: PageProps) {
                 Uncover new stories
               </span>
             </h1>
-            <SearchMovieForm page={validPage.page} />
+            <SearchMovieForm />
           </div>
         </div>
       </section>
@@ -52,7 +52,7 @@ export default async function Page({ params }: PageProps) {
       <div className=" w-full h-32" />
 
       <section className="pb-20">
-        <MovieList />
+        <MovieList page={validPage.page} />
         <Pagination page={validPage.page} />
       </section>
 

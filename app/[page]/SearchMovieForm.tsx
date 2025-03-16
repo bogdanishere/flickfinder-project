@@ -7,16 +7,11 @@ import {
   searchMovieSchema,
   type SearchMovieType,
 } from "@/validation/searchMovieValidation";
-import { searchMoviesByNameOrType } from "./actions";
-import { useMovieListStore } from "@/stores/movieListStore";
+
 import Button from "@/components/Button";
 import { useSearchMovieStore } from "@/stores/searchMovieStore";
 
-type SearchMovieFormProps = {
-  page: string | number;
-};
-
-export default function SearchMovieForm({ page }: SearchMovieFormProps) {
+export default function SearchMovieForm() {
   const router = useRouter();
   const {
     register,
@@ -29,31 +24,13 @@ export default function SearchMovieForm({ page }: SearchMovieFormProps) {
   const { searchMovie: movieSearch, setSearchMovie: setMovieSearch } =
     useSearchMovieStore();
 
-  const { setMovieList, setIsSubmitting } = useMovieListStore();
-
   const onSubmit: SubmitHandler<SearchMovieType> = async (data) => {
     if (data.movie === movieSearch) return;
-
-    setIsSubmitting(true);
-
-    try {
-      const data2 = await searchMoviesByNameOrType(data.movie, page);
-
-      if (data2.Response === "True") {
-        setMovieList(data2.Search);
-      } else if (data2.Response === "False") {
-        setMovieList([]);
-      }
-    } catch {
-      setMovieList([]);
-      console.error("Something went wrong in the search");
-      throw new Error("Something went wrong");
-    } finally {
-      setIsSubmitting(false);
-    }
-
-    if (data.movie !== movieSearch) router.push("/1");
     setMovieSearch(data.movie);
+
+    if (data.movie !== movieSearch) {
+      router.replace("1");
+    }
   };
 
   return (

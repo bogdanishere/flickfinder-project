@@ -2,14 +2,46 @@
 
 import Button from "@/components/Button";
 import Spinner from "@/components/Spinner";
-import { useMovieListStore } from "@/stores/movieListStore";
+// import { useMovieListStore } from "@/stores/movieListStore";
 import Image from "next/image";
 import Link from "next/link";
 
 import defaultImage from "@/public/not-found-image.jpg";
+import { useEffect, useState } from "react";
+import { searchMoviesByNameOrType } from "./actions";
+import { useSearchMovieStore } from "@/stores/searchMovieStore";
+import type { MovieList } from "@/types";
 
-export default function MovieList() {
-  const { movieList: movies, isSubmitting } = useMovieListStore();
+type MovieListProps = {
+  page: number;
+};
+
+export default function MovieList({ page }: MovieListProps) {
+  const [movies, setMovies] = useState<MovieList | []>([]);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { searchMovie } = useSearchMovieStore();
+
+  async function fetchMovies(searchMovie: string = "", page: number = 1) {
+    try {
+      setIsSubmitting(true);
+      const data = await searchMoviesByNameOrType(searchMovie, page);
+      if (data.Response === "True") {
+        setMovies(data.Search);
+      } else {
+        setMovies([]);
+      }
+    } catch {
+      throw new Error("Error fetching data");
+    } finally {
+      setIsSubmitting(false);
+    }
+  }
+
+  useEffect(() => {
+    fetchMovies(searchMovie, page);
+  }, [searchMovie, page]);
+
+  // i should use react query ffs to avoid this
 
   return (
     <div>
