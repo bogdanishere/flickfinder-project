@@ -1,7 +1,6 @@
 "use client";
 
 import { useForm, SubmitHandler } from "react-hook-form";
-import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   searchMovieSchema,
@@ -17,7 +16,6 @@ type SearchMovieFormProps = {
 };
 
 export default function SearchMovieForm({ page }: SearchMovieFormProps) {
-  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -52,7 +50,6 @@ export default function SearchMovieForm({ page }: SearchMovieFormProps) {
       setIsSubmitting(false);
     }
 
-    if (data.movie !== movieSearch) router.push("/1");
     setMovieSearch(data.movie);
   };
 
