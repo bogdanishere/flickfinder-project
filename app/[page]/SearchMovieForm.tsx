@@ -1,7 +1,6 @@
 "use client";
 
 import { useForm, SubmitHandler } from "react-hook-form";
-import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   searchMovieSchema,
@@ -11,8 +10,16 @@ import {
 import Button from "@/components/Button";
 import { useSearchMovieStore } from "@/stores/searchMovieStore";
 
+<<<<<<< HEAD
 export default function SearchMovieForm() {
   const router = useRouter();
+=======
+type SearchMovieFormProps = {
+  page: string | number;
+};
+
+export default function SearchMovieForm({ page }: SearchMovieFormProps) {
+>>>>>>> ea95568230cfdca92d695dd5907f0e4cbd96ea3d
   const {
     register,
     handleSubmit,
@@ -26,6 +33,28 @@ export default function SearchMovieForm() {
 
   const onSubmit: SubmitHandler<SearchMovieType> = async (data) => {
     if (data.movie === movieSearch) return;
+<<<<<<< HEAD
+=======
+
+    setIsSubmitting(true);
+
+    try {
+      const data2 = await searchMoviesByNameOrType(data.movie, page);
+
+      if (data2.Response === "True") {
+        setMovieList(data2.Search);
+      } else if (data2.Response === "False") {
+        setMovieList([]);
+      }
+    } catch {
+      setMovieList([]);
+      console.error("Something went wrong in the search");
+      throw new Error("Something went wrong");
+    } finally {
+      setIsSubmitting(false);
+    }
+
+>>>>>>> ea95568230cfdca92d695dd5907f0e4cbd96ea3d
     setMovieSearch(data.movie);
 
     if (data.movie !== movieSearch) {

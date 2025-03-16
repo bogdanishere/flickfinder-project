@@ -16,7 +16,7 @@ export function Pagination({ page }: { page: number }) {
   }
 
   return (
-    <div className="flex items-center justify-center gap-6 mx-auto py-4 lg:w-[50%]">
+    <div className="flex items-center justify-center gap-6 mx-auto py-4 lg:w-[35%]">
       <Button
         onClick={handlePrevious}
         className={`px-4 py-2 ${
