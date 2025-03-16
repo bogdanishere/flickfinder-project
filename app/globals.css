@@ -1,26 +1,231 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@plugin "tailwindcss-animate";
+
+@custom-variant dark (&:is(.dark *));
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-text: var(--text);
+  --color-primary: var(--color-primary);
+  --color-secondary: var(--color-secondary);
+  --color-background-footer: var(--background-footer);
+  --color-background-button: var(--background-button);
+
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* :root {
+  --radius: 0.625rem;
+  --background: #f1eaea;
+  --text: #333333;
+
+  --color-primary: rgba(56, 189, 248, 0.85);
+  --color-secondary: rgba(7, 89, 133, 0.85);
+  --background-footer: #e4dcdc;
+}
+
+.dark {
+  --background: #333333;
+  --text: #f1eaea;
+
+  --color-primary: rgba(56, 189, 248, 0.5);
+  --color-secondary: rgba(7, 89, 133, 0.5);
+  --background-footer: rgba(20, 6, 6, 0.8);
+} */
+
+:root {
+  --radius: 0.625rem;
+  --background: #f5efef;
+  --text: rgba(30, 20, 20, 0.7);
+
+  --color-primary: rgba(79, 172, 214, 0.8);
+  --color-secondary: rgba(25, 97, 133, 0.75);
+  --background-footer: #e8e1e1;
+  --background-button: rgba(7, 89, 133, 0.85);
+}
+
+.dark {
+  --background: #292929;
+  --text: #f5efef;
+
+  --color-primary: rgba(79, 172, 214, 0.45);
+  --color-secondary: rgba(25, 97, 133, 0.45);
+  --background-footer: rgba(30, 20, 20, 0.7);
+  --background-button: rgba(56, 189, 248, 0.85);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@keyframes moveInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+  80% {
+    transform: translateX(10px);
+  }
+  95% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes moveInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+  80% {
+    transform: translateX(-10px);
+  }
+  95% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+* {
+  transition-property: color, background-color, border-color,
+    text-decoration-color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* hsla(0, 0%, 60%, .9); */
+
+@layer components {
+  .custom-bg {
+    @apply bg-gradient-to-br from-[rgba(56,189,248,0.85)] to-[rgba(7,89,133,0.85)] 
+      dark:bg-gradient-to-br dark:from-[rgba(56,189,248,0.5)] dark:to-[rgba(7,89,133,0.5)] 
+      bg-cover bg-top relative transition-all ease-in-out;
+  }
+
+  .section1 {
+    @apply [clip-path:polygon(0_0,100%_0%,100%_75vh,0_100%)];
+  }
+
+  .footer {
+    @apply bg-[rgba(0,0,0,0.8)]
+    pt-96
+    pb-40
+    [clip-path:polygon(0_25vh,_100%_0,_100%_100%,_0_100%)]
+    max-[600px]:[clip-path:polygon(0_15vh,_100%_0,_100%_100%,_0_100%)];
+  }
+
+  .moveInLeft {
+    animation: moveInLeft 1s ease-out;
+  }
+
+  .spinner-container {
+    @apply w-[95%] h-[100vh] flex justify-center items-center;
+  }
+
+  .spinner {
+    @apply w-32 aspect-square rounded-full border-8 border-solid border-gray-300 border-r-gray-500 animate-spin mt-12 mx-auto mb-4;
+  }
+
+  .card {
+    @apply relative h-[40rem] [perspective:150rem];
+  }
+
+  /* .card__side {
+    @apply absolute top-0 left-0 w-[95%] h-[95%] [transition:transform_0.8s_ease,background-color_0.3s_ease,color_0.3s_ease] [backface-visibility:hidden] rounded-[10px] shadow-[0_4px_8px_rgba(0,0,0,0.1)] overflow-hidden;
+  } */
+
+  .card__side--front {
+    @apply bg-transparent;
+  }
+
+  /* .card__side--back {
+    @apply flex items-center justify-center transform rotateY-180;
+  } */
+}
+
+.animation-hyperlink {
+  @apply pl-[1rem] pr-[2rem] no-underline uppercase inline-block transition duration-200 hover:[transform:rotate(5deg)_scale(1.3)] hover:shadow-[0_1rem_2rem_rgba(0,0,0,0.2)] hover:text-[#38bdf8];
+}
+
+.card__side {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 95%;
+  height: 95%;
+  transition: transform 0.8s ease, background-color 0.3s ease, color 0.3s ease;
+  backface-visibility: hidden;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.card__side--back {
+  transform: rotateY(180deg);
+}
+
+.card:hover .card__side--front {
+  transform: rotateY(-180deg);
+}
+
+.card:hover .card__side--back {
+  transform: rotateY(0);
+}
+
+.heading-secondary {
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  display: inline-block;
+  background-image: linear-gradient(to right, #38bdf8, #075985);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: #38bdf8; /* Default color when not hovering */
+  transition: all 0.2s;
+  letter-spacing: 2px;
+}
+
+@media only screen and (max-width: 56.25em) {
+  .heading-secondary {
+    font-size: 1.2rem;
+    letter-spacing: 1.5px;
+  }
+}
+
+@media only screen and (max-width: 37.5em) {
+  .heading-secondary {
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+  }
+}
+
+.heading-secondary:hover {
+  transform: skewY(2deg) skewX(15deg) scale(1.1);
+  text-shadow: 0.5rem 1rem 2rem rgba(0, 0, 0, 0.2);
+  color: transparent; /* Make text transparent on hover to show gradient */
 }
