@@ -6,16 +6,10 @@ import Image from "next/image";
 import Sun from "./Sun";
 import Moon from "./Moon";
 import { useRouter } from "next/navigation";
-import { useSearchMovieStore } from "@/stores/searchMovieStore";
-import { searchMoviesByNameOrType } from "@/app/[page]/actions";
-import { useMovieListStore } from "@/stores/movieListStore";
 
 export default function ThemeChange() {
   const router = useRouter();
   const { theme, setTheme } = useTheme();
-
-  const { setMovieList, setIsSubmitting } = useMovieListStore();
-  const { searchMovie } = useSearchMovieStore();
 
   const handleThemeChange = () => {
     if (theme === "light") {
@@ -25,27 +19,12 @@ export default function ThemeChange() {
     }
   };
 
-  const handleGoBack = async () => {
-    try {
-      setIsSubmitting(true);
-      const data = await searchMoviesByNameOrType(searchMovie, 1);
-      if (data.Response === "True") {
-        setMovieList(data.Search);
-        router.push("/1");
-      } else if (data.Response === "False") {
-        setMovieList([]);
-        router.push("/1");
-      }
-    } catch {
-      console.error("Error while searching movies");
-      throw new Error("Error while searching movies");
-    } finally {
-      setIsSubmitting(false);
-    }
+  const handleGoBack = () => {
+    router.replace("/1");
   };
 
   return (
-    <nav className="absolute w-full flex justify-between items-center px-12 md:px-12 lg:px-20 py-12 z-50">
+    <nav className="absolute w-full flex justify-between items-center px-12 lg:px-20 py-12 z-50">
       <button className="flex items-center" onClick={handleGoBack}>
         <Image
           src={icon || "/placeholder.svg"}
@@ -56,7 +35,7 @@ export default function ThemeChange() {
       </button>
 
       <button
-        className="relative p-2 sm:p-3 transition-colors duration-200 focus:outline-none"
+        className="relative p-2 sm:p-3 transition-colors duration-200 focus:outline-none cursor-pointer"
         onClick={handleThemeChange}
         aria-label={
           theme === "light" ? "Switch to dark mode" : "Switch to light mode"

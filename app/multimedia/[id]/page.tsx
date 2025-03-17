@@ -32,7 +32,7 @@ export default async function Page({ params }: PageProps) {
 
   return (
     <div className="min-h-screen w-full custom-bg py-24">
-      <div className="px-4 pt-20 sm:px-6 lg:px-8 ">
+      <div className="px-4 lg:pt-20 sm:px-6 lg:px-8 pt-0">
         <div className="mx-auto max-w-7xl pt-10 lg:pt-16 ">
           <div className="grid grid-cols-1 gap-8 lg:grid-cols-[320px_1fr] lg:gap-16">
             {/* Movie Poster */}
@@ -58,7 +58,7 @@ export default async function Page({ params }: PageProps) {
 
               {/* Ratings Badge */}
               {data.imdbRating && (
-                <div className="absolute -right-4 top-4 flex h-16 w-16 items-center justify-center rounded-full bg-amber-500 text-center font-bold text-black shadow-lg">
+                <div className="absolute -right-4 -top-4 flex h-16 w-16 items-center justify-center rounded-full bg-amber-500 text-center font-bold text-black shadow-lg">
                   <div>
                     <div className="text-lg leading-none">
                       {data.imdbRating}

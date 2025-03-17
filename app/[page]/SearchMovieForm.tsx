@@ -10,19 +10,22 @@ import {
 import Button from "@/components/Button";
 import { useSearchMovieStore } from "@/stores/searchMovieStore";
 import { useRouter } from "next/navigation";
+import { useMovieIsLoading } from "@/stores/movieIsLoading";
 
 export default function SearchMovieForm() {
   const router = useRouter();
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors },
   } = useForm<SearchMovieType>({
     resolver: zodResolver(searchMovieSchema),
   });
 
   const { searchMovie: movieSearch, setSearchMovie: setMovieSearch } =
     useSearchMovieStore();
+
+  const { isSubmitting } = useMovieIsLoading();
 
   const onSubmit: SubmitHandler<SearchMovieType> = async (data) => {
     if (data.movie === movieSearch) return;

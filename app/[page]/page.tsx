@@ -35,7 +35,7 @@ export default async function Page({ params }: PageProps) {
     <header className="relative h-screen w-full p-8">
       <section className="relative h-screen section1">
         <div className="custom-bg min-h-screen w-full">
-          <div className="absolute top-[30%] left-1/2 -translate-x-1/2 -translate-y-1/2 text-center w-full px-4 lg:top-[40%]">
+          <div className="absolute top-[35%] left-1/2 -translate-x-1/2 -translate-y-1/2 text-center w-full px-4 lg:top-[40%]">
             <h1>
               <span className="block text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-normal tracking-[0.5rem] sm:tracking-[0.75rem] md:tracking-[1rem] lg:tracking-[1.5rem] animate-[moveInLeft_1.5s_ease-out_forwards]">
                 FlickFinder
@@ -51,7 +51,7 @@ export default async function Page({ params }: PageProps) {
 
       <div className=" w-full h-32" />
 
-      <section className="pb-20">
+      <section className="pb-20 w-full">
         <MovieList page={validPage.page} />
         <Pagination page={validPage.page} />
       </section>

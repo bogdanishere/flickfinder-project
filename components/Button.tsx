@@ -12,7 +12,7 @@ export default function Button({ className, children, ...props }: ButtonProps) {
       className={cn(
         "w-full px-5 py-3 text-lg font-semibold rounded-full transition-all duration-300",
         "bg-background-button/80 hover:bg-background-button/50 disabled:bg-gray-400",
-        " dark:disabled:bg-gray-600 min-w-40",
+        " dark:disabled:bg-gray-600 min-w-40 cursor-pointer",
         className
       )}
       {...props}
