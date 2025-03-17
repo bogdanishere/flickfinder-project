@@ -7,6 +7,9 @@ export default function ButtonBack() {
   const router = useRouter();
 
   const handleClick = () => {
+    if (window.history.length === 1) {
+      router.push("/1");
+    }
     router.back();
   };
 

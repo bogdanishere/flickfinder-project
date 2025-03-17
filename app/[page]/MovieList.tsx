@@ -6,57 +6,40 @@ import Image from "next/image";
 import Link from "next/link";
 
 import defaultImage from "@/public/not-found-image.jpg";
-import { useEffect, useState } from "react";
 import { searchMoviesByNameOrType } from "./actions";
 import { useSearchMovieStore } from "@/stores/searchMovieStore";
 import type { MovieList } from "@/types";
 import { useMovieIsLoading } from "@/stores/movieIsLoading";
+import { useQuery } from "@tanstack/react-query";
 
 type MovieListProps = {
   page: number;
 };
 
 export default function MovieList({ page }: MovieListProps) {
-  const [movies, setMovies] = useState<MovieList | []>([]);
-  // const [isSubmitting, setIsSubmitting] = useState(false);
   const { searchMovie } = useSearchMovieStore();
   const { isSubmitting, setIsSubmitting } = useMovieIsLoading();
 
-  // async function fetchMovies(searchMovie: string = "", page: number = 1) {
-  //   try {
-  //     setIsSubmitting(true);
-  //     const data = await searchMoviesByNameOrType(searchMovie, page);
-  //     if (data.Response === "True") {
-  //       setMovies(data.Search);
-  //     } else {
-  //       setMovies([]);
-  //     }
-  //   } catch {
-  //     throw new Error("Error fetching data");
-  //   } finally {
-  //     setIsSubmitting(false);
-  //   }
-  // }
-
-  useEffect(() => {
-    (async () => {
+  const { data: movies } = useQuery({
+    queryKey: ["movies", searchMovie, page],
+    queryFn: async () => {
       try {
         setIsSubmitting(true);
         const data = await searchMoviesByNameOrType(searchMovie, page);
         if (data.Response === "True") {
-          setMovies(data.Search);
+          return data.Search;
         } else {
-          setMovies([]);
+          return [];
         }
       } catch {
         throw new Error("Error fetching data");
       } finally {
         setIsSubmitting(false);
       }
-    })();
-  }, [searchMovie, page, setIsSubmitting]);
+    },
+  });
 
-  // i should use react query ffs to avoid this
+  if (!movies) return <Spinner />;
 
   return (
     <div>
@@ -72,6 +55,7 @@ export default function MovieList({ page }: MovieListProps) {
                   height={300}
                   src={movie.Poster === "N/A" ? defaultImage : movie.Poster}
                   alt={`Poster for ${movie.Title}`}
+                  priority
                 />
               </div>
 
