@@ -19,6 +19,11 @@ export async function generateMetadata(props: PageProps) {
   return {
     title,
     description: `Details for ${title}`,
+
+    openGraph: {
+      title,
+      description: `Details for ${title}`,
+    },
   };
 }
 
