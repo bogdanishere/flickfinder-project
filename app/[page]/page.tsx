@@ -19,6 +19,21 @@ export async function generateMetadata({
     title: "FlickFinder page " + page,
     description:
       "Welcome to FlickFinder, the best place to find your favorite movies, TV shows, and more!",
+
+    metadataBase: new URL(`https://flickfinder-project.vercel.app/${page}`),
+
+    openGraph: {
+      title: "FlickFinder page " + page,
+      description:
+        "Welcome to FlickFinder, the best place to find your favorite movies, TV shows, and more!",
+      images: [
+        {
+          url: "https://flickfinder-project.vercel.app/icon.png",
+          width: 1200,
+          height: 630,
+        },
+      ],
+    },
   };
 }
 

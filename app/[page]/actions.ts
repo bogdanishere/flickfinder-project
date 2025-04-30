@@ -3,7 +3,7 @@
 import type { SearchMoviesByNameOrType } from "@/types";
 import { validatePage } from "@/validation/validatePage";
 
-const apiKey = process.env.NEXT_API_KEY;
+const apiKey = process.env.NEXT_SERVER_ACTIONS_API_KEY as string;
 
 export const searchMoviesByNameOrType = async (
   query: string,
@@ -21,6 +21,8 @@ export const searchMoviesByNameOrType = async (
   const response = await fetch(
     `http://www.omdbapi.com/?apikey=${apiKey}&s=${query}&page=${validPage.page}`
   );
+
   const data = await response.json();
+
   return data;
 };
