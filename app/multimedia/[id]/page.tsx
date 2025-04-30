@@ -14,20 +14,25 @@ export async function generateMetadata(props: PageProps) {
 
   const data = await searchMovieById(id);
 
-  const title = "Title" in data ? data.Title : id;
+  const title = "Title" in data ? data.Title : `Movie ${id}`;
+
+  const poster =
+    "Poster" in data
+      ? data.Poster
+      : "https://flickfinder-project.vercel.app/icon.png";
 
   return {
-    title: `Movie ${title}`,
-    description: `Details for movie ${title}`,
+    title,
+    description: `Details for ${title}`,
 
     metadataBase: new URL("https://flickfinder-project.vercel.app"),
 
     openGraph: {
-      title: `Movie ${id}`,
-      description: `Details for movie ${title}`,
+      title,
+      description: `Details for ${title}`,
       images: [
         {
-          url: "https://flickfinder-project.vercel.app/icon.png",
+          url: poster,
           width: 1200,
           height: 630,
         },
