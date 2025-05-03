@@ -33,8 +33,9 @@ export async function generateMetadata(props: PageProps) {
       images: [
         {
           url: Poster,
-          width: 1200,
-          height: 630,
+          width: 320,
+          height: 480,
+          alt: `Poster for ${title}`,
         },
       ],
     },
