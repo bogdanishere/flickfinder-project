@@ -16,13 +16,27 @@ export async function generateMetadata(props: PageProps) {
 
   const title = "Title" in data ? data.Title : `Movie ${id}`;
 
+  const description = "Description" in data ? data.Description : null;
+
+  const Poster =
+    "Poster" in data
+      ? data.Poster
+      : "https://flickfinder-project.vercel.app/icon.png";
+
   return {
     title,
-    description: `Details for ${title}`,
+    description: `Details for ${description || title}`,
 
     openGraph: {
       title,
-      description: `Details for ${title}`,
+      description: `Details for ${description || title}`,
+      images: [
+        {
+          url: Poster,
+          width: 1200,
+          height: 630,
+        },
+      ],
     },
   };
 }
