@@ -9,7 +9,9 @@ import {
   useState,
 } from "react";
 
-type Theme = "light" | "dark" | "system";
+import Cookies from "js-cookie";
+
+export type Theme = "light" | "dark" | "system";
 
 type ThemeContextType = {
   theme: Theme;
@@ -18,8 +20,14 @@ type ThemeContextType = {
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
-export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
-  const [theme, setTheme] = useState<Theme>("system");
+export const ThemeProvider = ({
+  children,
+  initialTheme,
+}: {
+  children: React.ReactNode;
+  initialTheme: Theme;
+}) => {
+  const [theme, setTheme] = useState<Theme>(initialTheme);
   useEffect(() => {
     const root = window.document.documentElement;
     root.classList.remove("light", "dark");
@@ -35,6 +43,7 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
     }
 
     root.classList.add(theme);
+    Cookies.set("theme", theme);
   }, [theme]);
   return (
     <ThemeContext.Provider
