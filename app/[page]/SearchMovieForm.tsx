@@ -32,7 +32,9 @@ export default function SearchMovieForm() {
     setMovieSearch(data.movie);
 
     if (data.movie !== movieSearch) {
-      router.replace("1");
+      router.replace("1", {
+        scroll: false,
+      });
     }
   };
 
