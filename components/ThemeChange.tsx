@@ -24,12 +24,12 @@ export default function ThemeChange() {
   };
 
   return (
-    <nav className="absolute w-full flex justify-between items-center px-12 lg:px-20 py-12 z-50">
+    <nav className="absolute w-full flex justify-between items-center px-12 lg:px-20 py-10 lg:py-12 z-50">
       <button className="flex items-center" onClick={handleGoBack}>
         <Image
-          src={icon || "/placeholder.svg"}
+          src={icon}
           alt="icon"
-          className="h-12 w-auto sm:h-16 md:h-24 lg:h-32 xl:h-40 cursor-pointer transition-transform hover:scale-105"
+          className="h-14 w-auto sm:h-16 md:h-24 lg:h-32 xl:h-40 cursor-pointer transition-transform hover:scale-105"
           priority
         />
       </button>
@@ -41,7 +41,7 @@ export default function ThemeChange() {
           theme === "light" ? "Switch to dark mode" : "Switch to light mode"
         }
       >
-        <div className="relative h-10 w-10 sm:h-16 sm:w-16 md:h-20 md:w-20 lg:h-24 lg:w-24 xl:h-32 xl:w-32">
+        <div className="relative h-14 w-14 sm:h-16 sm:w-16 md:h-20 md:w-20 lg:h-24 lg:w-24 xl:h-32 xl:w-32">
           <Sun
             className={`absolute inset-0 h-full w-full transition-opacity duration-300 ${
               theme === "dark" ? "opacity-0" : "opacity-100"

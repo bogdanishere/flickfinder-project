@@ -41,7 +41,7 @@ export default function SearchMovieForm() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="space-y-4 pt-20 w-[70%] mx-auto"
+      className="space-y-4 pt-20 md:w-[70%] mx-auto w-[90%]"
     >
       <div className="flex flex-col gap-y-4">
         <input
@@ -49,7 +49,7 @@ export default function SearchMovieForm() {
           id="movie"
           placeholder="Search your next movie"
           {...register("movie", { required: true })}
-          className="block w-full px-4 py-3 text-lg bg-white/15 border-b-1 border-transparent  focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+          className="block w-full px-4 py-3 text-lg bg-white/15 border-b-1 border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
         />
         {errors.movie && (
           <span className="text-sm text-red-600 font-semibold ">
@@ -58,7 +58,11 @@ export default function SearchMovieForm() {
         )}
       </div>
 
-      <Button type="submit" disabled={isSubmitting} className="w-[40%]">
+      <Button
+        type="submit"
+        disabled={isSubmitting}
+        className="md:w-[40%] text-sm w-full"
+      >
         {isSubmitting ? "Searching..." : "Discover new stories"}
       </Button>
     </form>

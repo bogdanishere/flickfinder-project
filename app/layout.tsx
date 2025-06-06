@@ -26,7 +26,7 @@ export default async function RootLayout({
       <body className={inter.className}>
         <QueryProvider>
           <ThemeProvider initialTheme={theme}>
-            <main className="w-full h-screen relative  text-text bg-background">
+            <main className="w-full h-screen relative text-text bg-background transition-colors duration-300">
               <ThemeChange />
               {children}
             </main>
