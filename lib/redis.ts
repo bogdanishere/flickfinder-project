@@ -10,7 +10,7 @@ export const redis = new Redis({
 
 export const ratelimit = new Ratelimit({
   redis,
-  limiter: Ratelimit.slidingWindow(100, "10 s"), // 100 requests per 10 seconds
+  limiter: Ratelimit.slidingWindow(1000, "10 s"), // 1000 requests per 10 seconds
 });
 
 export function isSuspiciousPath(pathname: string): boolean {
