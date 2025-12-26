@@ -11,6 +11,7 @@ import { useSearchMovieStore } from "@/stores/searchMovieStore";
 import type { MovieList } from "@/types";
 import { useMovieIsLoading } from "@/stores/movieIsLoading";
 import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
 
 type MovieListProps = {
   page: number;
@@ -19,6 +20,7 @@ type MovieListProps = {
 export default function MovieList({ page }: MovieListProps) {
   const { searchMovie } = useSearchMovieStore();
   const { isSubmitting, setIsSubmitting } = useMovieIsLoading();
+  const [imageErrors, setImageErrors] = useState<Record<string, boolean>>({});
 
   const { data: movies } = useQuery({
     queryKey: ["movies", searchMovie, page],
@@ -53,9 +55,19 @@ export default function MovieList({ page }: MovieListProps) {
                   className="w-[95%] h-[95%] object-cover object-center"
                   width={200}
                   height={300}
-                  src={movie.Poster === "N/A" ? defaultImage : movie.Poster}
+                  src={
+                    movie.Poster === "N/A" || imageErrors[movie.imdbID]
+                      ? defaultImage
+                      : movie.Poster
+                  }
                   alt={`Poster for ${movie.Title}`}
                   priority
+                  onError={() => {
+                    setImageErrors((prev) => ({
+                      ...prev,
+                      [movie.imdbID]: true,
+                    }));
+                  }}
                 />
               </div>
 
