@@ -80,7 +80,11 @@ export default function MovieList({ page }: MovieListProps) {
                       <p className="text-lg">Category: {movie.Type}</p>
                     </div>
                   </div>
-                  <Link href={`/multimedia/${movie.imdbID}`} className="mb-6">
+                  <Link
+                    href={`/multimedia/${movie.imdbID}`}
+                    className="mb-6"
+                    prefetch={false}
+                  >
                     <Button>More Info</Button>
                   </Link>
                 </div>
