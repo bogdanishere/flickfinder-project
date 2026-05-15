@@ -2,6 +2,19 @@
   "name": "test-v2",
   "version": "0.1.0",
   "private": true,
+  "packageManager": "pnpm@11.1.2",
+  "pnpm": {
+    "minimumReleaseAge": 4320,
+    "overrides": {
+      "@hono/node-server": ">=1.19.13",
+      "postcss": ">=8.5.10"
+    },
+    "onlyBuiltDependencies": [
+      "@prisma/engines",
+      "prisma",
+      "sharp"
+    ]
+  },
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
@@ -18,9 +31,9 @@
     "clsx": "^2.1.1",
     "js-cookie": "^3.0.5",
     "lucide-react": "^0.482.0",
-    "next": "^16.2.3",
-    "react": "^19.2.5",
-    "react-dom": "^19.2.5",
+    "next": "^16.2.6",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6",
     "react-hook-form": "^7.54.2",
     "tailwind-merge": "^3.0.2",
     "tailwindcss-animate": "^1.0.7",
