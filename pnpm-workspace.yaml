@@ -1,7 +1,12 @@
-minimumReleaseAge: 1440
-minimumReleaseAgeExclude: []
+minimumReleaseAge: 5760
+minimumReleaseAgeExclude: [ js-cookie@3.0.6, js-yaml@4.1.2 || 4.3.0 || 4.3.1, brace-expansion@1.1.16 || 1.1.17 || 1.1.18 || 5.0.7 || 5.0.8 || 5.0.9, postcss@8.5.18 || 8.5.23, nanoid@3.3.16 || 3.3.17 ]
 blockExoticSubdeps: true
 
 allowBuilds:
   sharp: true
   unrs-resolver: true
+
+# Migrate din package.json (pnpm 11 nu mai citeste campul `pnpm`).
+overrides:
+  "@hono/node-server": ">=1.19.13"
+  postcss: ">=8.5.10"
