@@ -1,5 +1,5 @@
 minimumReleaseAge: 5760
-minimumReleaseAgeExclude: [ js-cookie@3.0.6, js-yaml@4.1.2 || 4.3.0 || 4.3.1, brace-expansion@1.1.16 || 1.1.17 || 1.1.18 || 5.0.7 || 5.0.8 || 5.0.9, postcss@8.5.18 || 8.5.23, nanoid@3.3.16 || 3.3.17 ]
+minimumReleaseAgeExclude: [ js-cookie@3.0.6, js-yaml@4.1.2 || 4.3.0 || 4.3.1, brace-expansion@1.1.16 || 1.1.17 || 1.1.18 || 5.0.7 || 5.0.8 || 5.0.9, postcss@8.5.18 || 8.5.23, nanoid@3.3.16 || 3.3.17, next@16.3.3, '@next/env@16.3.3', '@next/swc-darwin-arm64@16.3.3', '@next/swc-darwin-x64@16.3.3', '@next/swc-linux-arm64-gnu@16.3.3', '@next/swc-linux-arm64-musl@16.3.3', '@next/swc-linux-x64-gnu@16.3.3', '@next/swc-linux-x64-musl@16.3.3', '@next/swc-win32-arm64-msvc@16.3.3', '@next/swc-win32-x64-msvc@16.3.3' ]
 blockExoticSubdeps: true
 
 allowBuilds:
@@ -10,3 +10,9 @@ allowBuilds:
 overrides:
   "@hono/node-server": ">=1.19.13"
   postcss: ">=8.5.10"
+
+# Next.js e exclus de la `pnpm update` automat: upgrade-urile se fac manual
+# si deliberat, dupa verificarea diff-ului (vezi RCE AVIF / CVE-2026-75604, aug 2026).
+updateConfig:
+  ignoreDependencies:
+    - next
